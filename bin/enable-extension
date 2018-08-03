@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+DCONF_PATH=/org/gnome/shell
+ENABLE_EXTENSIONS_PATH=$DCONF_PATH/enabled-extensions
+DEFAULT_ENABLE_EXTENSIONS="['user-theme@gnome-shell-extensions.gcampax.github.com', 'status-menu-buttons@dev.antergos.com', 'dash-to-dock@micxgx.gmail.com']"
+
+extension=$1
+enable_extension_list=$(dconf read $ENABLE_EXTENSIONS_PATH)
+
+if [ -z "$enable_extension_list" ]
+then
+    enable_extension_list=$DEFAULT_ENABLE_EXTENSIONS
+fi
+
+cat > /tmp/after_enable.conf << END
+[/]
+enabled-extensions=$(echo ${enable_extension_list} | cut -d']' -f 1), $extension]
+END
+
+cat /tmp/after_enable.conf
+dconf load $DCONF_PATH/ < /tmp/after_enable.conf
+

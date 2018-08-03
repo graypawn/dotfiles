@@ -1,0 +1,25 @@
+;;; -*- mode: lisp; -*-
+;;; The following lines added by ql:add-to-init-file:
+#-quicklisp
+(let ((quicklisp-init (merge-pathnames ".quicklisp/setup.lisp"
+                                       (user-homedir-pathname))))
+  (when (probe-file quicklisp-init)
+    (load quicklisp-init)))
+
+(defparameter pkgs
+  '(:quickproject            ; skeleton of a Common Lisp project.
+    :cl-fad                  ; - pathname library
+    :alexandria              ; -- Utility
+    :prove                   ; Unit testing
+    :cl-ppcre                ; - Perl-compatible regular expression
+    :let-plus                ; - Destructuring extension of LET*
+    :arrow-macros            ; clojure's threading macros
+    ))
+
+;; quickload list
+(dolist (pkg (reverse pkgs))
+  (ql:quickload pkg :silent t))
+
+;;; quickproject
+(setq quickproject:*author* "graypawn <choi.pawn @gmail.com>"
+      quickproject:*license* "GPL3")

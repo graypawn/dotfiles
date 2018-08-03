@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+# -*- coding: utf-8 -*-
+# Author: graypawn (choi.pawn @gmail.com)
+# Created: 2018-07-31
+DOTFILES_DIR="$HOME/Documents/dotfiles"
+PKG_SCRIPT_DIR="$DOTFILES_DIR/pkg-script"
+DCONF_DIR="$DOTFILES_DIR/dconf"
+
+## PARAMETER
+pkg=$1
+
+
+## RUN
+if [ -x "$PKG_SCRIPT_DIR/$pkg.sh" ]
+then
+    echo Install $pkg with custom script
+    $PKG_SCRIPT_DIR/$pkg.sh -S $@
+else
+    sudo pacman -S $@ || {
+        echo Install Failed
+        exit 1;
+    }
+fi
+
+
+## FOR DCONF
+if [ -f "$DCONF_DIR/$pkg.conf" ] && [ -f "$DCONF_DIR/$pkg.conf.path" ]
+then
+    dconf load $(cat "$DCONF_DIR/$pkg.conf.path") < "$DCONF_DIR/$pkg.conf"
+    echo "Add dconf for $pkg"
+fi
+
+
+## FINISH
+echo -e "\033[91m"Completed"\033[0m"
