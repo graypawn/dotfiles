@@ -43,6 +43,9 @@ link/config/xfce4/xfconf/xfce-perchannel-xml/xfce4-settings-manager.xml
 link/config/xfce4/xfconf/xfce-perchannel-xml/xfce4-notifyd.xml
 link/config/xfce4/xfconf/xfce-perchannel-xml/xfce4-mixer.xml
 
+# Systemd
+link/config/systemd/user/default.target.wants/
+
 # Thunar
 link/config/Thunar/renamerrc
 link/config/Thunar/accels.scm
