@@ -1,8 +1,7 @@
-emacs
+spacemacs
 gnome-extensions
 gnome-extension.dash-to-panel
 gnome-extension.no-topleft-hot-corner
 guake
 ibus
 mpv
-
