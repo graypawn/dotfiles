@@ -25,8 +25,8 @@ $BASEDIR/00-theme.sh
 
 
 # 1
-
+$BASEDIR/../link/install.sh
+$BASEDIR/01-pkgs.sh
 
 # Other
-$BASEDIR/../link/install.sh
 $BASEDIR/../icon/install.sh
